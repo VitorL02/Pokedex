@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/home/container/home_container.dart';
 
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: HomeContainer(
-        repository: PokemonRepository(),
+        repository: PokemonRepository(
+          dio: Dio(),
+        ),
       ),
     );
   }
