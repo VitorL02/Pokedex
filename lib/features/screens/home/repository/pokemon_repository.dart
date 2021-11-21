@@ -3,8 +3,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:pokedex/features/home/consts/consts_api.dart';
-import 'package:pokedex/features/home/error/error.dart';
+import 'package:pokedex/features/screens/home/consts/consts_api.dart';
+import '../error/error.dart';
+
 import 'package:pokedex/models/pokemon.dart';
 
 abstract class IPokemonRepository {

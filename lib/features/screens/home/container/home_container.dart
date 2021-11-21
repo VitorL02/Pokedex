@@ -1,14 +1,21 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:pokedex/features/common/error.dart';
+import 'package:pokedex/features/common/loading.dart';
+import 'package:pokedex/features/screens/details/container/details_container.dart';
+import 'package:pokedex/features/screens/home/pages/pokedex_home_page.dart';
+import 'package:pokedex/features/screens/home/repository/pokemon_repository.dart';
 import '../error/error.dart';
-import 'package:pokedex/features/home/pages/home_error.dart';
-import 'package:pokedex/features/home/pages/home_load.dart';
-import 'package:pokedex/features/home/pages/pokedex_home_page.dart';
-import 'package:pokedex/features/home/repository/pokemon_repository.dart';
 import 'package:pokedex/models/pokemon.dart';
 
 class HomeContainer extends StatelessWidget {
-  const HomeContainer({Key? key, required this.repository}) : super(key: key);
+  const HomeContainer(
+      {Key? key, required this.repository, required this.onUserTap})
+      : super(key: key);
+
   final IPokemonRepository repository;
+
+  final Function(String, PokedexDetailArguments) onUserTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,7 @@ class HomeContainer extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.hasData) {
-            return HomePage(list: snapshot.data!);
+            return HomePage(list: snapshot.data!, onUserTap: onUserTap);
           }
 
           if (snapshot.hasError) {
