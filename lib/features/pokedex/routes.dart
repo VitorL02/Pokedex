@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/screens/details/container/details_container.dart';
-import 'package:pokedex/features/screens/details/pages/detail_pages.dart';
 import 'package:pokedex/features/screens/home/container/home_container.dart';
 import 'package:pokedex/features/screens/home/repository/pokemon_repository.dart';
 
@@ -31,8 +30,9 @@ class PokedexRouter extends StatelessWidget {
           return MaterialPageRoute(
             builder: (context) {
               return PokedexDetailContainer(
-                  repository: repository,
-                  arguments: (settings.arguments as PokedexDetailArguments));
+                repository: repository,
+                arguments: (settings.arguments as PokedexDetailArguments),
+              );
             },
           );
         }

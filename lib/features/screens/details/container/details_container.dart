@@ -35,6 +35,8 @@ class PokedexDetailContainer extends StatelessWidget {
             return PokedexDetail(
               //Passa o nome do pokemon como parametro para selecionar os dados de qual pokemon
               nome: arguments.nome,
+              //Necessario utilizar a exclamação para garantir que essa lista sempre tera um valor,nunca vazio
+              list: snapshot.data!,
             );
           }
 
