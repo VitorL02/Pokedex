@@ -10,8 +10,8 @@ import 'package:pokedex/models/pokemon.dart';
 import '../../home/error/error.dart';
 
 class PokedexDetailArguments {
-  PokedexDetailArguments({required this.nome});
-  final String nome;
+  PokedexDetailArguments({required this.pokemon});
+  final Pokemon pokemon;
 }
 
 class PokedexDetailContainer extends StatelessWidget {
@@ -34,7 +34,7 @@ class PokedexDetailContainer extends StatelessWidget {
               snapshot.hasData) {
             return PokedexDetail(
               //Passa o nome do pokemon como parametro para selecionar os dados de qual pokemon
-              nome: arguments.nome,
+              pokemon: arguments.pokemon,
               //Necessario utilizar a exclamação para garantir que essa lista sempre tera um valor,nunca vazio
               list: snapshot.data!,
             );

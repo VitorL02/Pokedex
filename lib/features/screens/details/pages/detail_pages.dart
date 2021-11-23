@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokemon.dart';
 
 class PokedexDetail extends StatelessWidget {
-  const PokedexDetail({Key? key, required this.nome, required this.list})
+  const PokedexDetail({Key? key, required this.pokemon, required this.list})
       : super(key: key);
-  final String nome;
+  final Pokemon pokemon;
   final List<Pokemon> list;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(nome),
+        backgroundColor: pokemon.baseColor,
+        title: Text(pokemon.nome),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
