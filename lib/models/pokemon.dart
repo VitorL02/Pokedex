@@ -21,7 +21,7 @@ class Pokemon {
     );
   }
 
-  Color? get baseColor => _color(tipo: tipo[0] ?? '');
+  Color? get baseColor => _color(tipo: tipo[0]);
 
   Pokemon(
       {required this.nome,

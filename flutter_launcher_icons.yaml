@@ -1,0 +1,4 @@
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "lib/assets/pokedex_icone.png"
