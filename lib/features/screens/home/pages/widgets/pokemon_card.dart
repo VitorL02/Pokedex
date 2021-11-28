@@ -6,15 +6,21 @@ import 'package:pokedex/features/screens/home/pages/widgets/pokemon_type_widget.
 import 'package:pokedex/models/pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
-  const PokemonCard({Key? key, required this.pokemon, required this.ontap})
+  const PokemonCard(
+      {Key? key,
+      required this.pokemon,
+      required this.ontap,
+      required this.index})
       : super(key: key);
   final Pokemon pokemon;
   final Function(String, PokedexDetailArguments) ontap;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => ontap('/details', PokedexDetailArguments(pokemon: pokemon)),
+      onTap: () => ontap(
+          '/details', PokedexDetailArguments(pokemon: pokemon, index: index)),
       child: Stack(
         children: [
           Container(
@@ -77,7 +83,10 @@ class PokemonCard extends StatelessWidget {
           Positioned(
             bottom: 12,
             right: 2,
-            child: Image.network(pokemon.image),
+            child: Image.network(
+              pokemon.image,
+              height: 110,
+            ),
           )
         ],
       ),

@@ -6,7 +6,10 @@ import 'package:pokedex/features/screens/home/container/home_container.dart';
 import 'package:pokedex/features/screens/home/repository/pokemon_repository.dart';
 
 class PokedexRouter extends StatelessWidget {
-  const PokedexRouter({Key? key, required this.repository}) : super(key: key);
+  const PokedexRouter({
+    Key? key,
+    required this.repository,
+  }) : super(key: key);
   final PokemonRepository repository;
 
   @override
@@ -32,6 +35,7 @@ class PokedexRouter extends StatelessWidget {
               return PokedexDetailContainer(
                 repository: repository,
                 arguments: (settings.arguments as PokedexDetailArguments),
+                onBack: () => Navigator.of(context).pop(),
               );
             },
           );

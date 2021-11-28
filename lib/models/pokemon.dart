@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Pokemon {
   final String nome;
-  final String image;
   final List<String> tipo;
   final int id;
   final String ordem;
@@ -10,7 +9,6 @@ class Pokemon {
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
       nome: json['name'],
-      image: json['img'],
       tipo: (json['type'] as List<dynamic>)
           .map(
             (e) => e as String,
@@ -23,9 +21,12 @@ class Pokemon {
 
   Color? get baseColor => _color(tipo: tipo[0]);
 
+  // Utiliza o metodo get pare receber as imagens pela numero do pokemon da nova api
+  String get image =>
+      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${ordem}.png';
+
   Pokemon(
       {required this.nome,
-      required this.image,
       required this.id,
       required this.ordem,
       required this.tipo});
