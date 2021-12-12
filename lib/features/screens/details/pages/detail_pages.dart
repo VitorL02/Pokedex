@@ -24,20 +24,35 @@ class PokedexDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          AppBarDetail(
-            pokemon: pokemon,
-            onBack: onBack,
-          ),
-          PokemonDetailListWidget(
-            pokemon: pokemon,
-            list: list,
-            controller: controller,
-            onChangePokemon: onChangePokemon,
-          ),
-        ],
-      ),
-    );
+        body: CustomScrollView(
+      slivers: [
+        AppBarDetail(
+          pokemon: pokemon,
+          onBack: onBack,
+        ),
+        PokemonDetailListWidget(
+          pokemon: pokemon,
+          list: list,
+          controller: controller,
+          onChangePokemon: onChangePokemon,
+        )
+      ],
+    )
+
+        //   Stack(
+        //   children: [
+        //     AppBarDetail(
+        //       pokemon: pokemon,
+        //       onBack: onBack,
+        //     ),
+        //     PokemonDetailListWidget(
+        //       pokemon: pokemon,
+        //       list: list,
+        //       controller: controller,
+        //       onChangePokemon: onChangePokemon,
+        //     ),
+        //   ],
+        // ),
+        );
   }
 }
