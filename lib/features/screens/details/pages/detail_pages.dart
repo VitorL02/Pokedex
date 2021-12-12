@@ -5,7 +5,7 @@ import 'package:pokedex/features/screens/details/pages/widgets/detail_appBar_wid
 import 'package:pokedex/features/screens/details/pages/widgets/poke_detailList_widget.dart';
 import 'package:pokedex/models/pokemon.dart';
 
-class PokedexDetail extends StatelessWidget {
+class PokedexDetail extends StatefulWidget {
   const PokedexDetail({
     Key? key,
     required this.pokemon,
@@ -22,37 +22,71 @@ class PokedexDetail extends StatelessWidget {
   final ValueChanged<Pokemon> onChangePokemon;
 
   @override
+  State<PokedexDetail> createState() => _PokedexDetailState();
+}
+
+class _PokedexDetailState extends State<PokedexDetail> {
+  late ScrollController scroll_position;
+  bool isOnTop = true;
+
+  @override
+  void initState() {
+    super.initState();
+    scroll_position = ScrollController();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        AppBarDetail(
-          pokemon: pokemon,
-          onBack: onBack,
-        ),
-        PokemonDetailListWidget(
-          pokemon: pokemon,
-          list: list,
-          controller: controller,
-          onChangePokemon: onChangePokemon,
-        )
-      ],
-    )
-
-        //   Stack(
-        //   children: [
-        //     AppBarDetail(
-        //       pokemon: pokemon,
-        //       onBack: onBack,
-        //     ),
-        //     PokemonDetailListWidget(
-        //       pokemon: pokemon,
-        //       list: list,
-        //       controller: controller,
-        //       onChangePokemon: onChangePokemon,
-        //     ),
-        //   ],
-        // ),
-        );
+        body: NotificationListener(
+      onNotification: (notification) {
+        setState(() {
+          if (scroll_position.position.pixels > 37) {
+            isOnTop = false;
+          } else if (scroll_position.position.pixels <= 36) {
+            isOnTop = true;
+          }
+        });
+        return false;
+      },
+      child: CustomScrollView(
+        controller: scroll_position,
+        //Retira a animação de movimento da imagem do pokemon
+        physics: ClampingScrollPhysics(),
+        slivers: [
+          AppBarDetail(
+            isOnTop: isOnTop,
+            pokemon: widget.pokemon,
+            onBack: widget.onBack,
+          ),
+          PokemonDetailListWidget(
+            pokemon: widget.pokemon,
+            list: widget.list,
+            controller: widget.controller,
+            onChangePokemon: widget.onChangePokemon,
+          ),
+          SliverToBoxAdapter(
+              child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Container(
+                  color: widget.pokemon.baseColor,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ))
+        ],
+      ),
+    ));
   }
 }
